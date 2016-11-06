@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="heatmap.min.js"></script>
+</head>
+<body>
+	<div id="heatmapContainer"></div>
+
+	<a class="button" id="download">Download as image</a>
+	<a class="button" id="repaint">Repaint</a>
+
+	<div id="controls">
+		<div>Team select:</div>
+		<select name="team" id="teamSelector">
+			<option value="pm" selected>Prime Minister</option> 
+			<option value="terrorist">Terrorist</option>
+			<option value="cop">Cop</option>
+			<option value="bodyguard">Bodyguard</option>
+			<option value="psychopath">Psychopath</option>
+		</select>
+
+		<div class="config">
+			<div class='slider' id="minOpacity" data-config>
+				<label for="minOpacity">minOpacity</label>
+				<input type=range min=0 max=1 value=0 id="minOpacityInput" step=0.05></input>
+				<output for="minOpacity" id="minOpacityOutput"></output>
+			</div>
+
+			<div class='slider' id="maxOpacity" data-config>
+				<label for="maxOpacity">maxOpacity</label>
+				<input type=range min=0 max=1 value=0.5 id="maxOpacityInput" step=0.05></input>
+				<output for="maxOpacity" id="maxOpacityOutput"></output>
+			</div>
+
+			<div class='slider' id="blur" data-config>
+				<label for="blur">blur</label>
+				<input type=range min=0 max=1 value=0.5 id="blurInput" step=0.05></input>
+				<output for="blur" id="blurOutput"></output>
+			</div>
+		</div>
+		<div class="dataConfig">
+			<div class='slider' id="radius" data-setting>
+				<label for="radius">radius</label>
+				<input type=range min=0 max=100 value=1 id="radiusInput" step=1></input>
+				<output for="radius" id="radiusOutput"></output>
+			</div>	
+
+			<div class='number' id="dataValue" data-setting>
+				<label for="dataValue">dataValue</label>
+				<input type=number id="dataValueInput" min=1 max=100></input>
+			</div>		
+		</div>
+	</div>
+
+	<script src="ptpm-heatmap.js"></script>
+</body>
+</html>
