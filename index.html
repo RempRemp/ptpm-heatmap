@@ -13,14 +13,35 @@
 	<a class="button" id="repaint">Repaint</a>
 
 	<div id="controls">
-		<div>Team select:</div>
-		<select name="team" id="teamSelector">
-			<option value="pm" selected>Prime Minister</option> 
-			<option value="terrorist">Terrorist</option>
-			<option value="cop">Cop</option>
-			<option value="bodyguard">Bodyguard</option>
-			<option value="psychopath">Psychopath</option>
-		</select>
+		<div class="ib">
+			<div>Team select:</div>
+			<select name="team" id="teamSelector">
+				<option value="pm" selected>Prime Minister</option> 
+				<option value="terrorist">Terrorist</option>
+				<option value="cop">Cop</option>
+				<option value="bodyguard">Bodyguard</option>
+				<option value="psychopath">Psychopath</option>
+			</select>
+		</div>
+
+		<div class="ib">
+			<div>Map select:</div>
+			<select multiple id="mapSelector">
+				<option value="all" selected>All</option> 
+				<option value="a51">Area 51</option>
+				<option value="airassault">Air Assault</option>
+				<option value="bayside">Bayside</option>
+				<option value="chiliad">Mt. Chiliad</option>
+				<option value="countryside">Countryside</option>
+				<option value="desert">Desert</option>
+				<option value="factory">Factory</option>
+				<option value="ls">Los Santos</option>
+				<option value="lshydra">Los Santos with Hydra</option>
+				<option value="lv">Las Venturas</option>
+				<option value="lvobj">Las Venturas with Objectives</option>
+				<option value="sf">San Fierro</option>
+			</select>
+		</div>
 
 		<div class="config">
 			<div class='slider' id="minOpacity" data-config>

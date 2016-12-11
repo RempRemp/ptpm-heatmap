@@ -14,6 +14,7 @@ ptpmgeo = function() {
 	var mapImage;
 	var logText = "";
 	var teamSelector = $("#teamSelector");
+	var mapSelector = $("#mapSelector");
 
 	var init = function() {
 		heatmapConfig.container = document.getElementById("heatmapContainer");
@@ -59,7 +60,7 @@ ptpmgeo = function() {
 		window.setTimeout(function() {
 			heatmapInstance.configure(heatmapConfig);
 
-			setHeatmapData(logText, teamSelector.get(0).value);
+			setHeatmapData(logText);
 
 			heatmapInstance.setData({
 				max: 100,
@@ -81,13 +82,15 @@ ptpmgeo = function() {
 		var canvas = $("#heatmapContainer canvas");
 		canvas.attr("id", "heatmapCanvas");
 	
-		setHeatmapData(text, teamSelector.get(0).value);
+		setHeatmapData(text);
 
 		loadBackgroundImage();		
 	}
 
-	function setHeatmapData(text, team) {
+	function setHeatmapData(text) {
 		heatmapData = [];
+		var team = teamSelector.get(0).value;
+		var maps = mapSelector.get(0).selectedOptions;
 		var lines = text.split("\n");
 
 		for(var i = 0; i < lines.length; i++) {
@@ -101,11 +104,15 @@ ptpmgeo = function() {
 			var y = parseFloat(parts[4]) * -1
 			var z = parseFloat(parts[5]);
 			var interior = parseInt(parts[6]);
+			var mapName = parts[7];
 
 			if (skin == 0)
 				continue;
+			
+			if (mapName == "None")
+				continue;
 
-			if (skinToTeam(skin) == team && interior == 0) {
+			if (skinToTeam(skin) == team && interior == 0 && mapMatches(maps, mapNameToID(mapName))) {
 				heatmapData.push({
 					x: ((x + 3000) / 6000) * 1200, 
 					y: ((y + 3000) / 6000) * 1200, 
@@ -151,6 +158,47 @@ ptpmgeo = function() {
 			return "cop";
 
 		return "unknown";
+	}
+
+	var mapNameToID = function(mapName) {
+		mapName = mapName.toLowerCase();
+
+		if (mapName == "area 51")
+			return "a51";
+		else if (mapName == "air assault")
+			return "airassault";
+		else if (mapName == "bayside")
+			return "bayside";
+		else if (mapName == "mt. chiliad")
+			return "chiliad";
+		else if (mapName == "countryside")
+			return "countryside";
+		else if (mapName == "desert")
+			return "desert";
+		else if (mapName == "factory")
+			return "factory";
+		else if (mapName == "los santos")
+			return "ls";
+		else if (mapName == "los santos w/ hydra" || mapName == "los santos with hydra")
+			return "lshydra";
+		else if (mapName == "las venturas")
+			return "lv";
+		else if (mapName == "las venturas w/ objectives" || mapName == "las venturas with objectives")
+			return "lvobj";
+		else if (mapName == "san fierro")
+			return "sf";
+
+		return "none";
+	}
+
+	var mapMatches = function(maps, mapID) {	
+		for(var i = 0; i < maps.length; i++) {
+			if (maps[i].value == "all" || maps[i].value == mapID) {
+				return true
+			}
+		}
+
+		return false
 	}
 
 	return {
