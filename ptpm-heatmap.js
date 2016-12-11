@@ -93,18 +93,41 @@ ptpmgeo = function() {
 		var maps = mapSelector.get(0).selectedOptions;
 		var lines = text.split("\n");
 
-		for(var i = 0; i < lines.length; i++) {
-			var parts = lines[i].split(",")
+		var delimiter = ","
 
-			// time, id, skin, x, y, z, interior
+		if (text.includes("¶")) {
+			// paragraph delimiter
+			delimiter = "¶"
+		}
+
+		for(var i = 0; i < lines.length; i++) {
+			var parts = lines[i].split(delimiter)
+
+			// first version columns
 			var time = parts[0];
-			var id = parts[1];
+			var playerID = parts[1];
 			var skin = parseInt(parts[2]);
 			var x = parseFloat(parts[3]);
 			var y = parseFloat(parts[4]) * -1
 			var z = parseFloat(parts[5]);
 			var interior = parseInt(parts[6]);
 			var mapName = parts[7];
+
+			var roundID = "";
+			var time = "";
+
+			// newer version columns
+			if (delimiter == "¶") {
+				roundID = parts[0];
+				time = parts[1];
+				playerID = parts[2];
+				skin = parseInt(parts[3]);
+				x = parseFloat(parts[4]);
+				y = parseFloat(parts[5]) * -1
+				z = parseFloat(parts[6]);
+				interior = parseInt(parts[7]);
+				mapName = parts[8];			
+			}
 
 			if (skin == 0)
 				continue;
